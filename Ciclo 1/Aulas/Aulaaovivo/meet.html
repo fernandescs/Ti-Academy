@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
+    <title>Cards - Meet</title>
+</head>
+
+<style>
+
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        width: 100vw;
+        height: 100vh;
+    }
+
+    /* Formatações padrões */
+    .flex{
+        display: flex;
+    }
+
+    .coluna{
+        flex-direction: column;
+    }
+
+    .center-hv{
+        justify-content: center;
+        align-items: center;
+    }
+
+    .tela{
+        width: 320px;
+        height: 180px;
+        background-color: #37474F;
+        border-radius: 25px;
+        justify-content: space-between;
+        margin: 3px;
+    }
+
+    .topo , .rodape{
+        height: 40px;
+        width: 100%;
+        padding: 10px;
+        align-items: center;
+        margin: 2px;
+    }
+
+    .bola{
+        width: 80px;
+        height: 80px;
+        background-color: #039be5;
+        border-radius: 100%;
+        font-size: 42px;
+        color: white;
+    }
+
+    .rodape > label {
+        font-size: 18px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .end {
+        justify-content: flex-end;
+    }
+
+    .tela > .topo .mic{
+        width: 35px;
+        height: 35px;
+        background-color: gray;
+        border-radius: 100%;
+        color: white;
+        cursor: pointer;
+    }
+
+</style>
+
+<body class="flex center-hv">
+
+    <div class="tela flex coluna center-hv">
+        <div class="flex topo end">
+            <span class="material-icons flex mic center-hv">mic_off</span>
+        </div>
+        <div class="bola flex center-hv">
+            <label>M</label>
+        </div>
+        <div class="flex rodape">
+            <label>Maria</label>
+        </div>
+    </div>
+
+</body>
+</html>

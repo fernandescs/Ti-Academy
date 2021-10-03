@@ -1,0 +1,15 @@
+*{
+    border: 0;
+    padding: 0;
+    margin: 0;
+}
+
+div {
+    height: 600px;
+    width: 800px;
+    border: 1px solid black;
+    background-image: url(/Aula10/Ex16/saude_frutas_banana.jpg);
+    background-size: 25%;
+    background-repeat: repeat-y;
+}
+

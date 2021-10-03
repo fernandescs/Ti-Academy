@@ -1,0 +1,102 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Helvetica;
+}
+
+body{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+header{
+    width: 100%;
+    height: 40px;
+    background-color: #212121;
+    color: white;
+    display: flex;
+}
+
+div#logo{
+    width: 65%;
+    height: auto;
+    display: flex;
+    align-items: center;
+    padding-left: 10%;
+    font-size: 1.1em;
+}
+
+nav{
+    width: 35%;
+    height: 38px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+}
+
+a{
+    text-decoration: none;
+    color: white;
+    height: 33px;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#home{
+    background-color: #f9a825;
+    border-radius: 20px;
+}
+
+a:hover{
+    border-radius: 20px;
+    background-color: red;
+}
+
+div#meio{
+    width: 500px;
+    height: 200px;
+    border: 1px solid royalblue;
+    display: flex;
+    align-items: center;
+}
+
+div#frase{
+    width: 50%;
+    height: auto;
+    padding-left: 10px;
+}
+
+div#email{
+    width: 50%;
+    height: 175px;
+    border-left: 1px dashed #212121;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#caixaemail{
+    height: 33px;
+    width: 230px;
+    border-radius: 5px;
+    padding-left: 2px;
+    border: 1px solid #212121;
+}
+
+footer{
+    width: 100%;
+    height: 80px;
+    background-color: #212121;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2em;
+}

@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    border: 0;
+    padding: 0;
+}
+
+
+div {
+    background-image: url(../img/teste.jpg);
+    background-repeat: no-repeat;
+    width: 100%;
+    height: 300px;
+}
+

@@ -1,0 +1,38 @@
+* {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+:root{
+    --preto: black;
+    --vermelho: red;
+}
+
+div#quadrado {
+    height: 300px;
+    width: 300px;
+    border: 1px double black;
+    background-color: lightgray;
+    margin: 50px auto;
+    padding: 10px;
+    box-shadow: 2px 2px 4px blue;
+}
+
+div#objeto {
+    height: 150px;
+    width: 150px;
+    background-color: var(--preto);
+    border-radius: 100%;
+    margin: 15px auto;
+}
+
+div#objeto:hover {
+    height: 200px;
+    width: 200px;
+    background-color: var(--vermelho);
+    cursor: pointer;
+
+}
+

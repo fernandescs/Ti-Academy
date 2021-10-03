@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seja bem-vindo!</title>
+</head>
+
+<style>
+        *{
+        margin: 0 auto;
+        box-sizing: border-box;
+        width: 80%;
+        height: auto;
+        padding: 0;
+    }
+    section{
+        margin: 30px auto;
+        width: 100%;
+        height: auto;
+        margin: 15px auto;
+    }
+    label {
+        display: block;
+        width: 100%;
+    }
+    input{
+        width: 100%;
+        height: 20px;
+    }
+    
+</style>
+
+<body>
+    <section>
+    <form method="POST" name="login">
+        <fieldset>
+            <legend>Área de acesso</legend>
+            <label for="email">E-mail:</label>
+            <input required placeholder="usuário@email.com" type="email" id="email">
+            <label for="senha">Senha:</label>
+            <input required type="password" id="senha">
+            <input type="submit" name="enviar">
+        </fieldset>
+    </form>
+    </section>
+
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula 20</title>
+</head>
+
+<style>
+    *{
+        margin: 0;
+        box-sizing: border-box;
+        width: 80%;
+        height: auto;
+        padding: 0;
+    }
+    #formulario{
+        margin: 30px auto;
+        padding: 5px;
+        border: 1px solid darkblue;
+    }
+
+form{
+    width: 100%;
+    height: auto;
+    padding: 5px;
+}
+
+label{
+    display: block;
+    width: 100%;
+    height: auto;
+    padding: 2px;
+}
+
+fieldset{
+    padding: 2px;
+    border: none;
+}
+
+.txt{
+    width: 100%;
+    height: 30px;
+}
+</style>
+
+<body>
+    <section id="formulario">
+    <form method="post" name="cadastro">
+        <fieldset>
+            <legend> Cadastro de Usuário</legend>
+            <label for="nome">Nome:</label>
+            <input type="text" required placeholder="Digite seu nome" class="txt" id="nome" name="nome" value="">
+            <label for="sobrenome"> Sobrenome:</label>
+            <input type="text" class="txt" id="sobrenome" name="sobrenome" value="">
+            <label for="dataNas">Data de Nascimento (XX/XX/XXXX):</label>
+            <input type="text" class="txt" id="dataNas" name="dataNas" value="">
+        </fieldset>
+        <fieldset>
+            <legend>Sexo</legend>
+            <label>Masculino</label>
+            <input type="radio" name="genero" value="M">
+            <label>Feminino</label>
+            <input type="radio" name="genero" value="F">
+        </fieldset>
+        <fieldset>
+            <legend>Conhecimento em:</legend>
+            <label for="PHP">PHP</label>
+            <input type="checkbox" id="PHP" name="php" value="php">
+            <label for="js">JavaScript</label>
+            <input type="checkbox" id="js" name="Java" value="js">
+            <label for="html_css">HTML/CSS</label>
+            <input type="checkbox" id="html_css" name="HTML/CSS" value="hyml_css">
+        </fieldset>
+        <fieldset>
+            <label for="select">Classificação</label>
+        <select name="" id="">
+            <option value="select">Selecione</option>
+            <option value="junior">Junior</option>
+            <option value="senior">Senior</option>
+            <option value="master">Master</option>
+        </select>
+        </fieldset>
+        <fieldset>
+        <label for="livre">Escreva mais sobre você</label>
+        <textarea id="livre" cols="50" rows="10"></textarea>
+        </fieldset>
+        <input type="submit" name="enviarDados" value="ENVIAR">
+    </form>
+</section>
+</body>
+</html>
