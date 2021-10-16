@@ -1,0 +1,46 @@
+# Configurando a Maquina (Windows)
+1 - Baixar e instalar o git para windows 
+    https://gitforwindows.org/
+2 - Baixar e instalar o gerenciador de senhas git para Windows
+    https://github.com/Microsoft/Git-Credential-Manager-for-Windows
+
+# Iniciando um novo projeto
+1 - Criar um repositorio (novo projeto) no Git-hub e copiar o link https
+    https://github.com/fernandescs/Ti-Academy.git
+2 - Criar uma pasta no computador (preferencia mesmo nome)
+3 - Adicionar o workspace no VS code.
+4 - Carregar um terminal na pasta principal da workspace
+5 - Para iniciar o projeto
+    git init
+6 - Para sincronizar as pastas
+    git remote add origin https://github.com/fernandescs/Ti-Academy.git
+
+# Fazendo a primeira sincronização
+1 - Adicionar um arquivo README.md com as informações sobre o que tem/terá no repositório
+    Ex.: como usar seu git-hub, como esta organizado, pra que serve seus arquivos...
+2 - Para checar se ele reconheceu as alterações
+    git status
+3 - Em vermelho ele identifica o que não tem no checkpoint. Ele tbm fornece o branch (master, main, ...)
+4 - Adicione o arquivo para sincronização de modificação local
+    git add .
+5 - Para salvar as alterações com detalhe sobre o que foi feito (checkpoint local)
+    git commit -m "Criação do README.md"
+6 - Checar a sincronização
+    git status
+7 - Primeira sincronização com o git-hub
+    git push -u origin master
+8 - Acessar seu repositório e conferir se o arquivo aparece.
+
+# Após a primeira sincronização
+1 - Faça as alterações necessárias na pasta
+2 - Cheque se as alterações foram reconhecidas (em vermelho)
+    git status
+3 - Adicione as alterações para sincronização local
+    git add .
+4 - Conferir se todas as alterações foram reconhecidas (em verde)
+    git status
+5 - Criar checkpoint local
+    git commit -m "Upload dos arquivos do Ciclo 1 - Html e CSS"
+6 - Upload dos arquivos para o git-hub
+    git push
+7 - Conferir no repositorio online

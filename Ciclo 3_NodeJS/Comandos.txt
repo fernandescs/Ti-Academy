@@ -1,0 +1,90 @@
+#iniciando um projeto
+npm init
+
+#Adicionar as informações sobre o novo projeto
+
+#Abrir o VSCode e iniciar dentro da pasta do projeto um terminal
+#Instalar as dependencias
+# https://expressjs.com/pt-br/
+#Framework para aplicativos Web permitindo trabalhar com rotas
+npm install express --save
+#Framework para sistema de camadas
+#http://expressjs.com/en/resources/middleware/cors.html
+#Framework para trabalhar com bancos de dados por mapeamento
+#https://sequelize.org/
+npm install --save sequelize
+#instalar o drive do banco de dados
+ npm install --save mysql2
+#ferramenta auxiliar o Sequelize CLI
+#Permite as migrações
+#https://sequelize.org/master/manual/migrations.html
+npm install --save-dev sequelize-cli
+npx sequelize-cli init
+
+#Isso deve criar 4 pastas
+#config : config.json possui as três fases do projeto
+#desenvolver >> teste >> produção (uso)
+#models: index.js
+#seeders 
+#models : os modelos para o banco de dados
+
+#criar o banco de dados (XAMPP>APACHE on>MySQL on>ADMIN)
+#Criar os modelos (onde em User vem os modelos desejados)
+npx sequelize-cli model:generate --name Cliente --attributes firstName:string,lastName:string,email:string
+
+#após a criação de pastas abrir o models/cliente.js
+#alterar Cliente.init quais as informações desejadas e o tipo de dado
+#https://sequelize.org/master/manual/model-basics.html#data-types
+    nome: DataTypes.STRING,
+    endereco: DataTypes.STRING,
+    cidade: DataTypes.STRING,
+    uf: DataTypes.STRING,
+    nascimento: DataTypes.DATEONLY
+
+
+npx sequelize-cli model:generate --name Servico --attributes firstName:string,lastName:string,email:string
+#Alterações do modelo
+    nome: DataTypes.STRING,
+    descricao: DataTypes.STRING
+
+npx sequelize-cli model:generate --name Pedido --attributes firstName:string,lastName:string,email:string
+#Alterações do modelo
+    dataPedido: DataTypes.DATEONLY
+
+npx sequelize-cli model:generate --name ItemPedido --attributes firstName:string,lastName:string,email:string
+#alterações do modelo
+    quantidade: DataTypes.INTEGER,
+    valor: DataTypes.FLOAT
+
+#Em models tbm é necessário definir as associações
+#https://sequelize.org/master/manual/assocs.html
+#Cada relação deve ser feita em cada um dos modelos.
+
+#Cada item dentro da pasta modelo criou um arquivo em migrations
+#Cada um deles deve ser atualizado para atender as outras informações que foram atualizadas
+Chave-Primária: Chave que define cada uma das classes, linkando cada uma delas à um número.
+Chave-Estrangeira: O cliente é quem faz o pedido, assim precisa que o cliente forneça linkagem ao pedido.
+CUIDADOS: Update e Delete devem ser definidos. Padrão de formatação tbm é essencial
+nome da classe é singular e nome da tabela é no plural
+creatAt e updateAt não devem ser alterados!
+Uma tabela que depende de duas chaves não tem id!
+As chaves estrangeiras são colocadas no references
+
+#quando forem acabadas as configs das migrations, é possível iniciar a migração
+#https://sequelize.org/master/manual/migrations.html
+#Entrar no banco de dados (carregar ele)
+npx sequelize-cli db:migrate
+#atualizar a página e conferir cada um deles.
+
+
+
+
+
+
+
+
+
+
+
+
+
