@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="estilo.css">
+    <script type="module" src="script.js"></script>
+    <title>Desafio 2</title>
+</head>
+<body>
+    <header>
+        <div id="nome">
+            <h1>ME ACHA!</h1>
+            <h2>ENCONTRE UM ENDEREÇO PELO NÚMERO DE CEP</h2>
+        </div>
+
+    </header>
+    <main>
+        <div id="logo">
+            <span class="material-icons" id="icone">travel_explore</span>
+        </div>
+        <div id="formulario">
+            <form method="POST" name="formulario" id="formularioBusca">
+                <label for="cep">Cep</label>
+                <input type="text" id="cep" name="cep" value="" placeholder="00000-000">
+                <label>Rua</label>
+                <input type="text" id="logradouro" name="rua" value="" disabled>
+                <label>Bairro</label>
+                <input type="text" id="bairro" name="bairro" value="" disabled>
+                <label>Cidade</label>
+                <input type="text" id="localidade" name="cidade" value="" disabled>
+                <label>Estado</label>
+                <input type="text" id="uf" name="estado" value="" disabled>
+                <input type="button" name="buscar" id="buscar" value="BUSCAR">
+            </form>
+        </div>
+    </main>
+</body>
+</html>
