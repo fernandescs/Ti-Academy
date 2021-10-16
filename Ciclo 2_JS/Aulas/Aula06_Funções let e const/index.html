@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // Tipos de declarações de variáveis
+    var qualquer; // variavel global
+    let qq = "variavel let"; // tambem declara variavel
+    const valorConstante = 100; // constante global (não pode ser alterada)
+
+    if (true){
+        console.log(valorConstante);
+        var varInterna = "Var dentro do if";
+        let letInterna = "Let dentro do if";
+        const constInterna = 200;
+    }
+    console.log(varInterna) // responde ao definido
+    // console.log(letInterna) // erro pois let foi criado apenas para o if
+    // console.log(constInterna) // erro pois foi criada apenas no if
+    //assim consigo extrair do if com o var mas não com o let
+
+    // Funções
+    //função literal
+
+    function mensagemErro(){
+        var erro = "erro 101"
+        alert("Mensagem de erro")
+    }
+    mensagemErro()
+    //console.log(erro) // não funciona pois as funções possuem var locais
+
+    function concatenar(nome,sobrenome){
+        document.write(nome + " " + sobrenome)
+    }
+    concatenar("Cleverton","Fernandes")
+
+    // Funções anônimas
+    let semNome = function(){
+        alert("Função anônima dentro de variável")
+    }
+    semNome();
+
+    let funAnonComPar = function(idade,idadePar){
+        if (idade > idadePar){
+            alert("Você tem idade maior que "+idadePar)
+        } else{
+            alert("Você tem idade menor que "+idadePar)
+        }
+    }
+
+    funAnonComPar(20,18)
+    funAnonComPar(15,18)
+// Funções deixam os códigos mais claros e conseguem ser reaproveitados
+
+
+</script>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    function manipularStrings (nome) {
+    console.log(`A palavra ${nome} tem ${nome.length} caracteres`)
+    console.log(`Pode ser formatada para ${nome.toLowerCase()} e ${nome.toUpperCase()}`)
+    console.log(`A letra ${nome[2].toLocaleUpperCase()} é a 3ª letra de ${nome.toLocaleUpperCase()}`)
+    console.log(`Se trocar por X fica ${nome.replace(nome[2],'X').toLocaleUpperCase()}`)
+    }
+
+manipularStrings("Marcelo")
+manipularStrings("Nascimento")
+
+
+</script>
+<body>
+    
+</body>
+</html>

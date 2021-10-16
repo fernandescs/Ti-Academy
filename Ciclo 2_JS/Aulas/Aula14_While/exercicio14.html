@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+function lerObjeto (objeto) {
+    for (let propriedade in objeto){
+        console.log(`${propriedade} : ${objeto[propriedade]}`)
+        if (propriedade == 'valor'){
+            total += objeto[propriedade]
+        }
+    }
+}
+
+    var Cesta = [{
+        produto : "Uva",
+        valor : 10
+    },{
+        produto:"Melão",
+        valor: 5
+    }]
+
+    var total = 0
+    for (let produto of Cesta){
+        lerObjeto(produto)
+    }
+    console.log(`O total da cesta é ${total}`)
+
+
+</script>
+<body>
+    
+</body>
+</html>

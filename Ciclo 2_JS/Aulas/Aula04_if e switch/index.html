@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+    // sistema condicional if
+    var ano = 2021;
+
+    if (ano == 2021){
+        console.log("O valor da variável é 2021")
+    }
+
+    // sistema condicional if else
+    if (ano == 2022){
+        console.log("O valor da variável é 2022")
+    } else {
+        console.log("O valor da variável é diferente de 2022")
+    }
+
+    // É possível usar if dentro de if (if aninhado)
+    var x =1;
+    var y =2;
+    var z =3;
+    if (x == y){
+        console.log("x=y")
+    } else {
+        if (x == z){
+            console.log("x=z")
+        } else {
+            console.log("x não é igual a y ou a z")
+        }
+    }
+
+    // é mais adequado usar um switch para casos com muitas separações
+    switch (x){
+        case y:
+            console.log("x=y")
+        break
+        case z:
+            console.log("x=z")
+        break
+        default:
+            console.log("x não é igual a y ou a z")
+        break
+    } // o break serve para dizer onde termina os comandos do case.
+
+
+
+
+</script>
+<body>
+    
+</body>
+</html>

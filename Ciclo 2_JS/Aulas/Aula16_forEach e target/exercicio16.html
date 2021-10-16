@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    #entrada{
+        width: 30%;
+        height: auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        margin: 30px auto;
+        border: 1px solid black;
+    }
+    #saida{
+        width: auto;
+        height: 50%;
+        margin: 10px auto;
+        padding: 10px;
+        border: 1px dotted black;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+
+<script>
+
+    window.onload = function (){
+        const tab = document.querySelector("#tabuada")
+        const btn = document.querySelector("#calcular")
+        const resp = document.querySelector("#resposta")
+
+        btn.addEventListener('click',function(){
+            var num = Number(tab.value)
+            if (num >= 1 && num <= 10 && num != NaN){
+                for (let i=0; i <= 10; i++){
+                    resp.innerHTML += `Para ${num}x${i} = ${num*i} <p>`
+                }
+            } else {
+            alert("Apenas números de 1 a 10 são aceitos!")
+            }
+
+        })
+    }
+</script>
+
+<body>
+    <div id="entrada">
+        <label for="tabuada">Digite um número de 1 a 10 para fazer a tabuada:</label>
+        <input type="text" value="" name="tabuada" id="tabuada">
+        <input type="button" value="Calcular" id="calcular">
+    </div>
+    <div id="resposta"></div>
+
+</body>
+</html>
