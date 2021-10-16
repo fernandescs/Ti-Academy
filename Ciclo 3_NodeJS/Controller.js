@@ -168,3 +168,129 @@ app.post('/itempedido',async(req,res) => {
         });
     });
 });
+
+//Consulta de dados = Model Querying 
+//função findAll
+app.get('/listaservicosall',async(req,res) => {
+    await servico.findAll({
+        raw: true
+    }).then(function(servicos){
+        res.json({servicos})
+    });
+});
+
+app.get('/listapedidosall',async(req,res) => {
+    await pedido.findAll({
+        raw: true
+    }).then(function(pedidos){
+        res.json({pedidos})
+    });
+});
+
+app.get('/listaclientesall',async(req,res) => {
+    await cliente.findAll({
+        raw: true
+    }).then(function(clientes){
+        res.json({clientes})
+    });
+});
+
+// Busca ordenada (order)
+app.get('/listaservicos',async(req,res) => {
+    await servico.findAll({
+        order: [['nome','ASC']] //ASC=menor -> maior;DESC=maior -> menor
+    }).then(function(servicos){
+        res.json({servicos})
+    });
+});
+
+//Numero de itens count
+app.get('/ofertaservicos', async(req,res)=>{
+    await servico.count('id').then(function(servicos){
+        res.json(servicos)
+    })
+})
+
+//buscar um especifico
+app.get('/servico/:id', async(req,res)=>{
+    await servico.findByPk(req.params.id)
+    .then(serv =>{ // exemplo com arrow function
+        return res.json({
+            error: false,
+            serv
+        })
+    }).catch(function(erro){ //outra forma de escrever a função
+        return res.status(400).json({
+            error : true,
+            message : "Não foi possível conectar"
+        })
+    })
+})
+
+//Exercicios Aula09
+app.get('/A09E01', async function (req,res){
+    await cliente.findAll({
+        raw: true
+    }).then(clientes =>{
+        return res.json({
+            message : "Lista dos Clientes",
+            clientes
+        })
+    })
+})
+
+app.get('/A09E02', async function (req,res){
+    await cliente.findAll({
+        order: [['createdAt','DESC']] //ASC=menor -> maior;DESC=maior -> menor
+    }).then(clientes =>{
+        return res.json({
+            message : "Lista dos Clientes por tempo de cadastro",
+            clientes
+        })
+    })
+})
+
+app.get('/A09E03', async function (req,res){
+    await pedido.findAll({
+        raw: true
+    }).then(pedidos =>{
+        return res.json({
+            message : "Lista dos Pedidos",
+            pedidos
+        })
+    })
+})
+
+app.get('/A09E03', async function (req,res){
+    await pedido.findAll({
+        raw: true
+    }).then(pedidos =>{
+        return res.json({
+            message : "Lista dos Pedidos",
+            pedidos
+        })
+    })
+})
+
+app.get('/A09E05', async function (req,res){
+    await cliente.count('id')
+    .then(numeroclientes =>{
+        return res.json({
+            message : "Número de Clientes",
+            numeroclientes
+        })
+    })
+})
+
+app.get('/A09E06', async function (req,res){
+    await pedido.count('id')
+    .then(numeropedidos =>{
+        return res.json({
+            message : "Número de Pedidos",
+            numeropedidos
+        })
+    })
+})
+
+
+// Aula 09 - Visualize o pedido por ordem de valor
