@@ -76,6 +76,23 @@ As chaves estrangeiras são colocadas no references
 npx sequelize-cli db:migrate
 #atualizar a página e conferir cada um deles.
 
+#Aula 5 - Editando o Controller
+#Criar na raiz um arquivo Controller.js
+#Para ver a atualização sem a necessidade de ficar reiniciando o servidor
+#https://www.npmjs.com/package/nodemon
+npm install --save-dev nodemon
+#Precisa chamar os módulos, criar o app e configurar a porta
+
+Aula 6 - método create
+#sincrona precisa de um retorno
+#assintona não precisa de um retorno
+
+Aula 7 - inserção externa
+
+
+
+
+
 
 
 
