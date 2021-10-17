@@ -89,7 +89,31 @@ Aula 6 - método create
 
 Aula 7 - inserção externa
 
+Aula 12 - Realizaçãoo de consulta + alteração de dados
+# Adicionar chave estrangeira na associação dos models
+# Ela indica qual parâmetro será utilizado para associar tudo
+# É preciso definir qual será a chave e o trajeto (tipo chave - fechadura)
+#Antes:
+#     models/cliente.js
+    static associate(models) {
+      // define association here
+      Cliente.hasMany(models.Pedido);
+    }
 
+#Depois:
+#     models/cliente.js
+    static associate(models) {
+      // define association here
+      Cliente.hasMany(models.Pedido,{
+        foreignKey: 'ClienteId', as: 'pedidos'
+      });
+    }
+
+#Isso representa que:
+O Cliente tem muitos Pedidos- Cliente.hasMany(models.Pedido);
+Esta solicitação é feita no modelo do Pedido - models.Pedido;
+eles devem ser associados com o ID do Cliente - foreignKey: 'ClienteId';
+Esta associação recebe o apelido de pedidos
 
 
 
