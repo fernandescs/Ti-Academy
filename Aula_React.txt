@@ -1,0 +1,99 @@
+#No mesmo nível da pasta Ciclo3 executar um terminal (get bash here) e executar
+npx create-react-app ciclo4
+
+# Isso deve criar a aplicação com algumas pastas
+- Em public/index.html já alterar o título.
+
+# Em src deixar os arquivos
+- App.css: Deixar sem conteúdo
+- index.js: Remover o import index.css e o reportWebVitals
+- setupTests.js
+- App.js: Deixar com o conteúdo
+
+import './App.css';
+function App() {
+  return (
+    <div>
+    </div>
+  );
+}
+export default App;
+
+#Para trabalhar com o sistema de camadas, criar dentro de src a pasta views.
+#Nesta pasta ficarão localizadas as páginas do app, como a home
+-Criar a pasta home e adicionar o arquivo index.js dentro dela
+
+#Em um terminal na pasta instalar
+npm install react-router-dom
+#ele permite criar rotas que facilitam a coneção entre as pastas.
+
+#Realizar importação dele no App.js
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
+#Dentro do views/Home/index.js
+export const Home = () =>{
+    return (
+        <div>
+            Home
+        </div>
+    )
+}
+
+#importar o Home
+#dentro de App.js:
+import { Home } from './views/Home'
+
+
+
+#Para criar a rota adicionar o Router
+      <Router>
+        <Switch>
+          <Route path="/" component={Home}/>
+        </Switch>
+      </Router>
+
+#Esse processo pode ser realizado para adicionar as pastas com as funcionalidades da página do app
+
+#Para auxiliar na estilização será utilizada o react strap
+npm install --save bootstrap reactstrap
+#Eles devem ser importados no src/index.js
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+#Após a importação, criar dentro de src uma pasta chamada components
+#Esses componentes são exportados para serem utilizados nas outras páginas
+
+#para formatar a barra de navegação
+#Criar em components/Menu.js
+#Adicionar as informações básicas
+export const Menu = () => {
+    return (
+        <div>
+            <h1>Menu</h1>
+        </div>
+    )
+}
+
+#Em App.js, importar o menu e adicionar dentro de Router a posição onde ele deve ficar dentro de Router (Antes de Swich para aparecer independente da página).
+import { Menu } from './components/Menu'
+
+      <Router>
+        <Menu/>
+        <Switch>
+          <Route exact path="/" component={Home}/>
+        </Switch>
+      </Router>
+
+#Iniciar a personalização, sendo que a maior parte pode ser editada dentre os modelos padrões.
+
+#Atalho para indentar é shift alt f
+
+#As formatações segue os padrões do reactstrap
+
+# Para alterar a logo, alterar o arquivo em public/favicon.ico
+# Alterar o index.html
+
+
+
+
+
+
