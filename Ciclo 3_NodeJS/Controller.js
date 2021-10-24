@@ -228,6 +228,67 @@ app.get('/servico/:id', async(req,res)=>{
     })
 })
 
+
+//Exercicios Aula09
+//Liste todos os clientes
+app.get('/A09E01', async function (req,res){
+    await cliente.findAll({
+        raw: true
+    }).then(clientes =>{
+        return res.json({
+            message : "Lista dos Clientes",
+            clientes
+        })
+    })
+})
+
+//Liste todos os clientes por tempo de cadastro
+app.get('/A09E02', async function (req,res){
+    await cliente.findAll({
+        order: [['createdAt','DESC']] //ASC=menor -> maior;DESC=maior -> menor
+    }).then(clientes =>{
+        return res.json({
+            message : "Lista dos Clientes por tempo de cadastro",
+            clientes
+        })
+    })
+})
+
+//Liste todos os pedidos
+app.get('/A09E03', async function (req,res){
+    await pedido.findAll({
+        raw: true
+    }).then(pedidos =>{
+        return res.json({
+            message : "Lista dos Pedidos",
+            pedidos
+        })
+    })
+})
+
+//Busque o número de clientes no banco de dados
+app.get('/A09E05', async function (req,res){
+    await cliente.count('id')
+    .then(numeroclientes =>{
+        return res.json({
+            message : "Número de Clientes",
+            numeroclientes
+        })
+    })
+})
+
+//Busque o número de pedidos no banco de dados
+app.get('/A09E06', async function (req,res){
+    await pedido.count('id')
+    .then(numeropedidos =>{
+        return res.json({
+            message : "Número de Pedidos",
+            numeropedidos
+        })
+    })
+})
+
+
 //Atualizações de classes
 //alteração estática (save)
 app.get('/updateservico01', async(req,res) =>{
@@ -311,7 +372,6 @@ app.put('/pedido/:id/editaritem', async(req,res)=>{
             message: 'Não foi possível alterar o pedido'
         })
     })
-
 })
 
 // Excluir Cliente
@@ -337,89 +397,351 @@ app.get('/excluircliente/:id', async(req,res) => {
 })
 
 
+
+
+
+
 // Desafio: Incluir no sistemas a compra de equipamentos
+//reconhecer os models adicionais
+let compra = models.Compra;
+let itemcompra = models.ItemCompra;
+let produto = models.Produto;
 
 
+// CRUD - Compras
+//CREATE - Nova Compra
+app.post('/novacompra',async(req,res) => {
+    await compra.create(
+        req.body
+    ).then(function(){ // Após tentar:
+        return res.json({
+            error: false,
+            message: 'A compra foi criada com sucesso!'
+        });
+    }).catch(function(erro){ //Caso não funcione
+        return res.status(400).json({
+            error: true,
+            message: 'Foi impossivel conectar ao servidor'
+        });
+    });
+});
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//Exercicios Aula09
-//Liste todos os clientes
-app.get('/A09E01', async function (req,res){
-    await cliente.findAll({
+//READ - Listar Todas as Compras
+app.get('/compras',async(req,res) => {
+    await compra.findAll({
         raw: true
-    }).then(clientes =>{
+    }).then(function(compras){
+        res.json({compras})
+    })
+});
+
+//Listar uma compra
+app.get('/compra/:id', async(req,res)=>{
+        //ver se a compra existe
+        if(!await compra.findByPk(req.params.id)){
+            return res.status(400).json({
+                error: true,
+                message: 'A Compra não foi encontrada.'
+            })
+        }
+
+    await compra.findByPk(req.params.id)
+    .then(compra =>{ 
         return res.json({
-            message : "Lista dos Clientes",
-            clientes
+            error: false,
+            compra
+        })
+    }).catch(erro => { 
+        return res.status(400).json({
+            error : true,
+            message : "Não foi possível conectar."
         })
     })
 })
 
-//Liste todos os clientes por tempo de cadastro
-app.get('/A09E02', async function (req,res){
-    await cliente.findAll({
-        order: [['createdAt','DESC']] //ASC=menor -> maior;DESC=maior -> menor
-    }).then(clientes =>{
+//UPDATE - Atualizar Compra
+app.put('/editarcompra', async(req,res) =>{
+    //ver se a compra existe
+    if(!await compra.findByPk(req.body.id)){
+        return res.status(400).json({
+            error: true,
+            message: 'A Compra não foi encontrada.'
+        })
+    }
+    await compra.update(req.body,{
+        where:{id: req.body.id}
+    }).then(function(){
         return res.json({
-            message : "Lista dos Clientes por tempo de cadastro",
-            clientes
+            error: false,
+            message: "Compra alterada com sucesso!"
+        })
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Erro na alteração do serviço."
+        })
+    })
+});
+
+//DELETE - excluir Compra
+app.get('/excluircompra/:id', async(req,res) => {
+    //ver se a compra existe
+    if(!await compra.findByPk(req.params.id)){
+        return res.status(400).json({
+            error: true,
+            message: 'A Compra não foi encontrada.'
+        })
+    }
+    await compra.destroy({
+        where: {id: req.params.id}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: 'Compra excluída com sucesso!'
+        })
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: 'Não foi possível excluir a compra!'
         })
     })
 })
 
-//Liste todos os pedidos
-app.get('/A09E03', async function (req,res){
-    await pedido.findAll({
+// // CRUD - Produto
+// //CREATE - Novo Produto
+app.post('/novoproduto',async(req,res) => {
+    await produto.create(
+        req.body
+    ).then(function(){ // Após tentar:
+        return res.json({
+            error: false,
+            message: 'Produto criado com sucesso!'
+        });
+    }).catch(function(erro){ //Caso não funcione
+        return res.status(400).json({
+            error: true,
+            message: 'Foi impossivel conectar ao servidor'
+        });
+    });
+});
+
+// //READ - Listar todos os produtos
+app.get('/produtos',async(req,res) => {
+    await produto.findAll({
         raw: true
-    }).then(pedidos =>{
+    }).then(function(produtos){
+        res.json({produtos})
+    })
+});
+
+// //Listar um produto
+app.get('/produto/:id', async(req,res)=>{
+    //ver se o produto existe
+    if(!await produto.findByPk(req.params.id)){
+        return res.status(400).json({
+            error: true,
+             message: 'O produto não foi encontrado.'
+        })
+    }
+
+    await produto.findByPk(req.params.id)
+    .then(produto =>{ 
         return res.json({
-            message : "Lista dos Pedidos",
-            pedidos
+            error: false,
+            produto
+        })
+    }).catch(erro => { 
+        return res.status(400).json({
+            error : true,
+            message : "Não foi possível conectar"
         })
     })
 })
 
-//Busque o número de clientes no banco de dados
-app.get('/A09E05', async function (req,res){
-    await cliente.count('id')
-    .then(numeroclientes =>{
+// //UPDATE - Atualizar Produto
+app.put('/editarproduto', async(req,res) =>{
+    //ver se o produto existe
+    if(!await produto.findByPk(req.body.id)){
+        return res.status(400).json({
+            error: true,
+             message: 'O produto não foi encontrado.'
+        })
+    }
+    await produto.update(req.body,{
+        where:{id: req.body.id}
+    }).then(function(){
         return res.json({
-            message : "Número de Clientes",
-            numeroclientes
+            error: false,
+            message: "Produto alterado com sucesso!"
+        })
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Não foi possível conectar."
+        })
+    })
+});
+
+// //DELETE - excluir Produto
+app.get('/excluirproduto/:id', async(req,res) => {
+    //ver se o produto existe
+    if(!await produto.findByPk(req.params.id)){
+        return res.status(400).json({
+            error: true,
+             message: 'O produto não foi encontrado.'
+        })
+    }
+    await produto.destroy({
+        where: {id: req.params.id}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: 'Produto excluído com sucesso!'
+        })
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: 'Não foi possível conectar.'
         })
     })
 })
 
-//Busque o número de pedidos no banco de dados
-app.get('/A09E06', async function (req,res){
-    await pedido.count('id')
-    .then(numeropedidos =>{
+
+// CRUD - Item Compra
+//CREATE - Novo item comprado
+app.post('/novoitemcompra',async(req,res) => {
+    await itemcompra.create(
+        req.body
+    ).then(function(){ // Após tentar:
         return res.json({
-            message : "Número de Pedidos",
-            numeropedidos
+            error: false,
+            message: 'Item adicionado com sucesso!'
+        });
+    }).catch(function(erro){ //Caso não funcione
+        return res.status(400).json({
+            error: true,
+            message: 'Foi impossivel conectar ao servidor'
+        });
+    });
+});
+
+//READ - Listar Todos os Itens
+app.get('/itenscompras',async(req,res) => {
+    await itemcompra.findAll({
+        raw: true
+    }).then(function(itemcompra){
+        res.json({itemcompra})
+    })
+});
+
+//UPDATE - Atualizar ItemCompra
+app.put('/compra/:id/editaritem', async(req,res)=>{
+    const item={
+        quantidade: req.body.quantidade,
+        valor: req.body.valor
+    }
+
+    //ver se a compra existe
+    if(!await compra.findByPk(req.params.id)){
+        return res.status(400).json({
+            error: true,
+            message: 'A compra não foi encontrada.'
+        })
+    }
+
+    //ver se o produto existe
+    if(!await produto.findByPk(req.body.ProdutoId)){
+        return res.status(400).json({
+            error: true,
+            message: 'O Produto não foi encontrado.'
+        })
+    }
+
+    // alterar o item da compra
+    await itemcompra.update(item, {
+        //Condições para alteração
+        where: 
+        Sequelize.and(
+            {ProdutoId:req.body.ProdutoId},
+            {CompraId: req.params.id}
+        )
+    }).then(function(itens){
+        return res.json({
+            error: false,
+            message: 'Compra alterado com sucesso',
+            itens
+        })
+    }).catch(function(erro){
+        return res.json({
+            error: true,
+            message: 'Não foi possível conectar.'
+        })
+    })
+})
+
+//DELETE - excluir Compra
+app.get('/compra/:id/excluiritem', async(req,res) => {
+
+    //ver se a compra existe
+    if(!await compra.findByPk(req.params.id)){
+        return res.status(400).json({
+            error: true,
+            message: 'A Compra não foi encontrada.'
+        })
+    }
+    //ver se o produto existe
+    if(!await produto.findByPk(req.body.ProdutoId)){
+        return res.status(400).json({
+            error: true,
+            message: 'O Produto não foi encontrado.'
+        })
+    }
+
+    await itemcompra.destroy({
+        where: 
+        Sequelize.and(
+            {ProdutoId:req.body.ProdutoId},
+            {CompraId: req.params.id}
+        )
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: 'Item excluído com sucesso!'
+        })
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: 'Não foi possível conectar'
+        })
+    })
+})
+
+//Listar item de uma compra
+app.get('/compra/:id/listaritem', async(req,res)=>{
+        //ver se a compra existe
+        if(!await compra.findByPk(req.params.id)){
+            return res.status(400).json({
+                error: true,
+                message: 'A Compra não foi encontrada.'
+            })
+        }
+
+    await itemcompra.findAll({
+        where : {CompraID : req.params.id}
+    })
+    .then(resposta =>{ // exemplo com arrow function
+        return res.json({
+            error: false,
+            resposta
+        })
+    }).catch(erro => { //outra forma de escrever a função
+        return res.status(400).json({
+            error : true,
+            message : "Não foi possível conectar"
         })
     })
 })
 
 
-//DUVIDAS
-// Aula 09 - Visualize o pedido por ordem de valor
-// Exercícios Aula 12 - Localizar os serviços do Cliente
+
+

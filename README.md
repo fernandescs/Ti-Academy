@@ -11,3 +11,8 @@
     - Exercícios corrigidos
     - Desafio 1: Kitanda
     - Desafio 2: Me Acha!
+
+## Ciclo 3 : NodeJs
+    - Conteúdo das aulas (Construção de um projeto com banco de dados)
+    - Exercícios
+    - Desafio: Códigos no final do Controller.js (Inclusão de Compra, Produtos e ItemCompra ao projeto)
