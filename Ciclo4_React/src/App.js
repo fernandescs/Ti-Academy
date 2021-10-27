@@ -6,6 +6,9 @@ import { Home } from './views/Home'
 import { ListarClientes } from './views/Cliente/Listar'
 import { ListarPedidos  } from './views/Pedido/Listar'
 import { ListarServicos } from './views/Servico/Listar'
+import { Item } from './views/Servico/Item'
+import { VerPedido } from './views/Pedido/Visualizar'
+
 
 function App() {
   return (
@@ -17,8 +20,8 @@ function App() {
           <Route path="/listar-clientes" component={ListarClientes}/>
           <Route path="/listar-pedidos" component={ListarPedidos}/>
           <Route path="/listar-servicos" component={ListarServicos}/>
-
-
+          <Route path="/listar-pedido/:id" component={Item}/>
+          <Route path="/pedido/:id" component={VerPedido}/>
         </Switch>
       </Router>
 

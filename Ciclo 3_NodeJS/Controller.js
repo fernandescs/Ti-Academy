@@ -172,7 +172,7 @@ app.post('/novoitempedido',async(req,res) => {
 
 //Consulta de dados = Model Querying 
 //função findAll
-app.get('/listaservicosall',async(req,res) => {
+app.get('/listar-servicos',async(req,res) => {
     await servico.findAll({
         raw: true
     }).then(function(servicos){
@@ -180,7 +180,7 @@ app.get('/listaservicosall',async(req,res) => {
     });
 });
 
-app.get('/listapedidosall',async(req,res) => {
+app.get('/listar-pedidos',async(req,res) => {
     await pedido.findAll({
         raw: true
     }).then(function(pedidos){
@@ -188,7 +188,7 @@ app.get('/listapedidosall',async(req,res) => {
     });
 });
 
-app.get('/listaclientesall',async(req,res) => {
+app.get('/listar-clientes',async(req,res) => {
     await cliente.findAll({
         raw: true
     }).then(function(clientes){
@@ -745,3 +745,29 @@ app.get('/compra/:id/listaritem', async(req,res)=>{
 
 
 
+// Inclusões conteúdo de React
+
+//realizar busca de pedidos relacionados por pedido
+app.get('/servico/:id/pedidos', async(req,res)=>{
+    await itempedido.findAll({
+        where: {ServicoId:req.params.id}
+    }).then(itens =>{
+        return res.json({
+            error: false,
+            itens
+        })
+    }).catch(function(erro){
+        return res.status(400).json({
+            error : true,
+            message : "Não foi possível conectar"
+        })
+    })
+})
+
+app.get('/pedido/:id/itens', async (req,res) => {
+    await itempedido.findAll({
+        where: {PedidoId:req.params.id}
+    }).then(ped => {
+        return res.json({ped})
+    })
+})

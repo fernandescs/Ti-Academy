@@ -92,6 +92,77 @@ import { Menu } from './components/Menu'
 # Para alterar a logo, alterar o arquivo em public/favicon.ico
 # Alterar o index.html
 
+#Para realizar requisições, utilziar o axios
+npm install --save axios
+
+# Essa forma de trabalho fragmentada deve ser descrita no index.js em src
+ReactDOM.render(
+  <React.Fragment>
+    <App />
+  </React.Fragment>,
+  document.getElementById('root')
+);
+
+#Adicionar dentro de src uma pasta config com um index.js e informar o link para a api
+export const api = "http://localhost:3001";
+
+#inserir nas páginas que farão requisição o import
+import axios from "axios"
+import { api } from "../../../config"
+import { useEffect, useState } from "react"
+
+#Inserir os dados de forma dinâmica:
+// Configurar os dados (definir e permitir configurar) e status
+    const [data, setData] = useState([]);
+    const [status, setStatus] = useState({
+        type: '',
+        message: ''
+    })
+
+//criar a função de consulta na api
+    const getServicos = async () => {
+        await axios.get(api + "/listar-servicos")
+            .then((response) => {
+                // console.log(response.data.servicos);
+                setData(response.data.servicos);
+            })
+            .catch(() => {
+                // console.log("Não foi possível conectar a api.")
+                setStatus({
+                    type: 'error',
+                    message: "Não foi possível conectar a api."
+                })
+            })
+    }
+
+//response.data.servicos = servicos é o nome que foi dado à resposta no back end
+
+//Executar a função e armazenar em uma lista
+    useEffect(()=>{
+        getServicos()
+    },[])
+
+//para exibir o status quando com erro
+                {/* Testar se houve error */}
+                {status.type === 'error' ?
+                <Alert color="danger">
+                    {status.message}
+                </Alert> : ''} 
+
+//para tornar a tabela dinâmica configurar o corpo da tabela
+                    <tbody>
+                        {data.map(item => (
+                            <tr key={item.id}>
+                                <th>{item.id}</th>
+                                <td>{item.nome}</td>
+                                <td>{item.descricao}</td>
+                                <td className="text-center/">Botão</td>
+                            </tr>
+                        ))}
+                    </tbody>
+
+
+
 
 
 
