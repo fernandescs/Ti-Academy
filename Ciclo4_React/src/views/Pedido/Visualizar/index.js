@@ -2,7 +2,7 @@ import { Alert, Container, Table } from "reactstrap"
 import axios from "axios"
 import { api } from "../../../config"
 import { useEffect, useState } from "react"
-import { Link } from "react-router-dom"
+// import { Link } from "react-router-dom"
 
 //props é para associar um parâmetro (no caso o id)
 export const VerPedido = (props) => {

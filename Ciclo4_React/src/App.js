@@ -8,6 +8,7 @@ import { ListarPedidos  } from './views/Pedido/Listar'
 import { ListarServicos } from './views/Servico/Listar'
 import { Item } from './views/Servico/Item'
 import { VerPedido } from './views/Pedido/Visualizar'
+import { CadastrarServico } from './views/Servico/Cadastrar';
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/listar-servicos" component={ListarServicos}/>
           <Route path="/listar-pedido/:id" component={Item}/>
           <Route path="/pedido/:id" component={VerPedido}/>
+          <Route path="/cadastrarservico" component={CadastrarServico}/>
         </Switch>
       </Router>
 

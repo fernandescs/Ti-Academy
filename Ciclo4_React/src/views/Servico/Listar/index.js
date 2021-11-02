@@ -35,14 +35,20 @@ export const ListarServicos = () => {
     return (
         <div>
             <Container>
-                <div>
-                    <h1>Visualizar informações do serviço</h1>
+                <div className="d-flex">
+                    <div>
+                        <h1>Visualizar informações do serviço</h1>
+                    </div>
+                    <div className="p-2 m-auto">
+                        <Link to="/cadastrarservico"
+                            className="btn btn-outline-primary btn-sm">Cadastrar</Link>
+                    </div>
+                    {/* Testar se houve error */}
+                    {status.type === 'error' ?
+                        <Alert color="danger">
+                            {status.message}
+                        </Alert> : ''}
                 </div>
-                {/* Testar se houve error */}
-                {status.type === 'error' ?
-                <Alert color="danger">
-                    {status.message}
-                </Alert> : ''} 
 
                 <Table striped>
                     <thead>
@@ -60,8 +66,8 @@ export const ListarServicos = () => {
                                 <td>{item.nome}</td>
                                 <td>{item.descricao}</td>
                                 <td className="text-center/">
-                                    <Link to={"/listar-pedido/"+item.id}
-                                    className="btn btn-outline-primary btn-sm">
+                                    <Link to={"/listar-pedido/" + item.id}
+                                        className="btn btn-outline-primary btn-sm">
                                         Consultar
                                     </Link>
                                 </td>
