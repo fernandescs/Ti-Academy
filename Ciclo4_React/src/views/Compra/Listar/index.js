@@ -4,7 +4,7 @@ import { api } from "../../../config"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-export const ListarPedidos = () => {
+export const ListarCompra = () => {
 
     const [data, setData] = useState([]);
 
@@ -13,14 +13,12 @@ export const ListarPedidos = () => {
         message: ''
     })
 
-    const getPedidos = async () => {
-        await axios.get(api + "/listar-pedidos")
+    const getCompra = async () => {
+        await axios.get(api + "/compras")
             .then((response) => {
-                // console.log(response.data.servicos);
-                setData(response.data.pedidos);
+                setData(response.data.compras);
             })
             .catch(() => {
-                // console.log("Não foi possível conectar a api.")
                 setStatus({
                     type: 'error',
                     message: "Não foi possível conectar a api."
@@ -28,8 +26,26 @@ export const ListarPedidos = () => {
             })
     }
 
+    const apagarCompra = async (idCompra) => {
+        const headers = {
+            'Content-type': 'application/json'
+        }
+
+        await axios.get(api + "/excluircompra/" + idCompra,{ headers })
+            .then((response) => {
+                console.log(response.data.error);
+                getCompra();
+            })
+            .catch(() => {
+                setStatus({
+                    type: 'error',
+                    message: 'Não foi possível conetar-se a API.'
+                });
+            });
+    }
+
     useEffect(() => {
-        getPedidos()
+        getCompra()
     }, [])
 
     return (
@@ -37,10 +53,10 @@ export const ListarPedidos = () => {
             <Container>
                 <div className="d-flex">
                     <div>
-                        <h1>Visualizar Pedidos</h1>
+                        <h1>Visualizar Compras</h1>
                     </div>
                     <div className="p-2 m-auto">
-                        <Link to="/cadastrarpedido"
+                        <Link to="/cadastrarcompra"
                             className="btn btn-outline-primary btn-sm">Cadastrar</Link>
                     </div>
                     {/* Testar se houve error */}
@@ -66,10 +82,16 @@ export const ListarPedidos = () => {
                                 <td>{item.ClienteId}</td>
                                 <td>{item.data}</td>
                                 <td className="text-center">
-                                    <Link to={"/listar-pedido/" + item.id}
-                                        className="btn btn-outline-primary btn-sm">
+                                    <Link to={"/compra/" + item.id}
+                                        className="btn btn-outline-info btn-sm mx-auto">
                                         Consultar
                                     </Link>
+                                    <Link to={"/editarcompra/" + item.id}
+                                        className="btn btn-outline-success btn-sm mx-auto">
+                                        Editar
+                                    </Link>
+                                    <span className="btn btn-outline-danger btn-sm"
+                                        onClick={() => apagarCompra(item.id)}>Excluir</span>
                                 </td>
                             </tr>
                         ))}

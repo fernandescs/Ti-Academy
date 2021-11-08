@@ -56,7 +56,7 @@ export const ListarServicos = () => {
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Descrição</th>
-                            <th>Ação</th>
+                            <th className="text-center">Ação</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,7 +65,7 @@ export const ListarServicos = () => {
                                 <th>{item.id}</th>
                                 <td>{item.nome}</td>
                                 <td>{item.descricao}</td>
-                                <td className="text-center/">
+                                <td className="text-center">
                                     <Link to={"/listar-pedido/" + item.id}
                                         className="btn btn-outline-primary btn-sm">
                                         Consultar

@@ -26,9 +26,20 @@ export const Home = () => {
                             Serviços
                         </a>
                     </div>
+                    <div className="p-2">
+                        <a href="/listar-compras"
+                            className="btn btn-outline-success btn-sm">
+                            Compras
+                        </a>
+                    </div>
+                    <div className="p-2">
+                        <a href="/listar-produtos"
+                            className="btn btn-outline-success btn-sm">
+                            Produtos
+                        </a>
+                    </div>
                 </div>
             </Container>
-
         </div>
     )
 }

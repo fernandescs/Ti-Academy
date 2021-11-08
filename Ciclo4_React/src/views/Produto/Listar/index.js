@@ -4,7 +4,7 @@ import { api } from "../../../config"
 import { useEffect, useState } from "react"
 import { Link } from "react-router-dom"
 
-export const ListarPedidos = () => {
+export const ListarProduto = () => {
 
     const [data, setData] = useState([]);
 
@@ -13,14 +13,12 @@ export const ListarPedidos = () => {
         message: ''
     })
 
-    const getPedidos = async () => {
-        await axios.get(api + "/listar-pedidos")
+    const getProdutos = async () => {
+        await axios.get(api + "/produtos")
             .then((response) => {
-                // console.log(response.data.servicos);
-                setData(response.data.pedidos);
+                setData(response.data.produtos);
             })
             .catch(() => {
-                // console.log("Não foi possível conectar a api.")
                 setStatus({
                     type: 'error',
                     message: "Não foi possível conectar a api."
@@ -28,8 +26,26 @@ export const ListarPedidos = () => {
             })
     }
 
+    const apagarProduto = async (idProduto) => {
+        const headers = {
+            'Content-type': 'application/json'
+        }
+
+        await axios.get(api + "/excluirproduto/" + idProduto,{ headers })
+            .then((response) => {
+                console.log(response.data.error);
+                getProdutos();
+            })
+            .catch(() => {
+                setStatus({
+                    type: 'error',
+                    message: 'Não foi possível conetar-se a API.'
+                });
+            });
+    }
+
     useEffect(() => {
-        getPedidos()
+        getProdutos()
     }, [])
 
     return (
@@ -37,10 +53,10 @@ export const ListarPedidos = () => {
             <Container>
                 <div className="d-flex">
                     <div>
-                        <h1>Visualizar Pedidos</h1>
+                        <h1>Visualizar Produtos</h1>
                     </div>
                     <div className="p-2 m-auto">
-                        <Link to="/cadastrarpedido"
+                        <Link to="/cadastrarproduto"
                             className="btn btn-outline-primary btn-sm">Cadastrar</Link>
                     </div>
                     {/* Testar se houve error */}
@@ -54,8 +70,8 @@ export const ListarPedidos = () => {
                     <thead>
                         <tr>
                             <th>ID</th>
-                            <th>Cliente</th>
-                            <th>Data</th>
+                            <th>Nome</th>
+                            <th>Descrição</th>
                             <th className="text-center">Ação</th>
                         </tr>
                     </thead>
@@ -63,13 +79,19 @@ export const ListarPedidos = () => {
                         {data.map(item => (
                             <tr key={item.id}>
                                 <th>{item.id}</th>
-                                <td>{item.ClienteId}</td>
-                                <td>{item.data}</td>
+                                <td>{item.nome}</td>
+                                <td>{item.descricao}</td>
                                 <td className="text-center">
-                                    <Link to={"/listar-pedido/" + item.id}
-                                        className="btn btn-outline-primary btn-sm">
+                                    <Link to={"/produto/" + item.id}
+                                        className="btn btn-outline-info btn-sm mx-auto">
                                         Consultar
                                     </Link>
+                                    <Link to={"/editarproduto/" + item.id}
+                                        className="btn btn-outline-success btn-sm mx-auto">
+                                        Editar
+                                    </Link>
+                                    <span className="btn btn-outline-danger btn-sm"
+                                        onClick={() => apagarProduto(item.id)}>Excluir</span>
                                 </td>
                             </tr>
                         ))}

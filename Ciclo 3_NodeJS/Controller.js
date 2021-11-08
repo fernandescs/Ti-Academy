@@ -122,7 +122,7 @@ app.post('/novoservico',async(req,res) => {
     });
 });
 
-app.post('/novocliente',async(req,res) => {
+app.post('/cadastrarcliente',async(req,res) => {
     await cliente.create(
         req.body
     ).then(function(){ // Após tentar:
@@ -729,10 +729,10 @@ app.get('/compra/:id/listaritem', async(req,res)=>{
     await itemcompra.findAll({
         where : {CompraID : req.params.id}
     })
-    .then(resposta =>{ // exemplo com arrow function
+    .then(compra =>{ // exemplo com arrow function
         return res.json({
             error: false,
-            resposta
+            compra
         })
     }).catch(erro => { //outra forma de escrever a função
         return res.status(400).json({
@@ -747,7 +747,7 @@ app.get('/compra/:id/listaritem', async(req,res)=>{
 
 // Inclusões conteúdo de React
 
-//realizar busca de pedidos relacionados por pedido
+//realizar busca de servicos relacionados por pedido
 app.get('/servico/:id/pedidos', async(req,res)=>{
     await itempedido.findAll({
         where: {ServicoId:req.params.id}
@@ -769,5 +769,97 @@ app.get('/pedido/:id/itens', async (req,res) => {
         where: {PedidoId:req.params.id}
     }).then(ped => {
         return res.json({ped})
+    })
+})
+
+//CRUD Cliente
+//Listar Cliente
+app.get('/cliente/:id', async(req,res)=>{
+    await cliente.findByPk(req.params.id)
+    .then(cliente =>{ // exemplo com arrow function
+        return res.json({
+            error: false,
+            cliente
+        })
+    }).catch(function(erro){ //outra forma de escrever a função
+        return res.status(400).json({
+            error : true,
+            message : "Não foi possível conectar"
+        })
+    })
+})
+
+//Editar Cliente
+app.put('/editarcliente', async(req, res)=>{
+    if(!await cliente.findByPk(req.body.id)){
+        return res.status(400).json({
+            error: true,
+            message: 'Cliente não foi encontrado.'
+        });
+    };
+    await cliente.update(req.body,{
+        where: {id: req.body.id}
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: "Cliente editado com sucesso!"
+        });
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: "Erro na edição do cliente."
+        })
+    })
+    
+});
+
+//Pedidos do Cliente
+app.get('/cliente/:id/pedidos', async(req,res)=>{
+    await pedido.findAll({
+        where: {ClienteId:req.params.id}
+    }).then(pedidos =>{
+        return res.json({
+            error: false,
+            pedidos
+        })
+    }).catch(function(erro){
+        return res.status(400).json({
+            error : true,
+            message : "Não foi possível conectar"
+        })
+    })
+})
+
+//Compras do Cliente
+app.get('/cliente/:id/compras', async(req,res)=>{
+    await compra.findAll({
+        where: {ClienteId:req.params.id}
+    }).then(compras =>{
+        return res.json({
+            error: false,
+            compras
+        })
+    }).catch(function(erro){
+        return res.status(400).json({
+            error : true,
+            message : "Não foi possível conectar"
+        })
+    })
+})
+
+//Compras que tenham o produto
+app.get('/produto/:id/compras', async(req,res)=>{
+    await itemcompra.findAll({
+        where: {ProdutoId:req.params.id}
+    }).then(itens =>{
+        return res.json({
+            error: false,
+            itens
+        })
+    }).catch(function(erro){
+        return res.status(400).json({
+            error : true,
+            message : "Não foi possível conectar"
+        })
     })
 })

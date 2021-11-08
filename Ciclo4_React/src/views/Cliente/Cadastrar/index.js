@@ -5,11 +5,12 @@ import axios from "axios";
 import { api } from "../../../config"
 
 
-export const CadastrarServico = () => {
+export const CadastrarCliente = () => {
 
-    const [servico, setServico] = useState({
+    const [cliente, setCliente] = useState({
         nome: '',
-        descricao: ''
+        endereco: '',
+        nascimento: ''
     });
 
     const [status, setStatus] = useState({
@@ -17,19 +18,19 @@ export const CadastrarServico = () => {
         message: ''
     })
 
-    const valorInput = e => setServico({
-        ...servico, [e.target.name]: e.target.value
+    const valorInput = e => setCliente({
+        ...cliente, [e.target.name]: e.target.value
     });
 
-    const cadServico = async e => {
+    const cadCliente = async e => {
         e.preventDefault();
-        console.log(servico);
+        console.log(cliente);
 
         const headers = {
             'Content-Type': 'application/json'
         }
 
-        await axios.post(api + "/novoservico", servico, { headers })
+        await axios.post(api + "/cadastrarcliente", cliente, { headers })
             .then((response) => {
                 // console.log(response.data.message);
                 if (response.data.error) {
@@ -53,11 +54,11 @@ export const CadastrarServico = () => {
         <Container>
             <div className="d-flex">
                 <div className="m-auto p-2">
-                    <h1>Cadastrar Serviço</h1>
+                    <h1>Cadastrar Cliente</h1>
                 </div>
                 <div className="p-2">
-                    <Link to="/listar-servicos"
-                        className="btn btn-outline-primary btn-sm">Serviços</Link>
+                    <Link to="/listar-clientes"
+                        className="btn btn-outline-primary btn-sm">Clientes</Link>
                 </div>
             </div>
 
@@ -65,13 +66,13 @@ export const CadastrarServico = () => {
             {status.type === 'error' ? <Alert color="danger">{status.message}</Alert> : ''}
             {status.type === 'success' ? <Alert color="success">{status.message}</Alert> : ''}
 
-            <Form className="p-2" onSubmit={cadServico}>
+            <Form className="p-2" onSubmit={cadCliente}>
                 <FormGroup className="p-2">
                     <Label for="nome">Nome</Label>
                     <Input
                         id="nome"
                         name="nome"
-                        placeholder="Nome do Serviço"
+                        placeholder="Nome Completo"
                         type="text"
                         onChange={valorInput}
                         required
@@ -79,15 +80,28 @@ export const CadastrarServico = () => {
                 </FormGroup>
 
                 <FormGroup className="p-2">
-                    <Label for="descricao">
-                        Descrição
-                    </Label>
+                    <Label for="endereco">Endereço</Label>
                     <Input
-                        id="descricao"
-                        name="descricao"
-                        placeholder="O que tem neste serviço?"
+                        id="endereco"
+                        name="endereco"
+                        placeholder="Endereço Completo com número"
                         type="text"
                         onChange={valorInput}
+                        required
+                    />
+                </FormGroup>
+
+                <FormGroup className="p-2">
+                    <Label for="nascimento">
+                        Data de Nascimento
+                    </Label>
+                    <Input
+                        id="nascimento"
+                        name="nascimento"
+                        // placeholder="AAAA-MM-DD"
+                        type="date"
+                        onChange={valorInput}
+                        required
                     />
                 </FormGroup>
 
