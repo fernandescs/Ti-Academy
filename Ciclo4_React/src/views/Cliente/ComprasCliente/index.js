@@ -65,7 +65,7 @@ export const ComprasCliente = (props) => {
                                 <td>{item.data}</td>
                                 {/* Ver pedido */}
                                 <td className="text-center/">
-                                    <Link to={"/pedido/"+item.PedidoId}
+                                    <Link to={"/compra/"+item.id}
                                     className="btn btn-outline-primary btn-sm">
                                         Consultar
                                     </Link>

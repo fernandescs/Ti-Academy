@@ -679,7 +679,7 @@ app.put('/compra/:id/editaritem', async(req,res)=>{
     })
 })
 
-//DELETE - excluir Compra
+//DELETE - excluir ItemCompra
 app.get('/compra/:id/excluiritem', async(req,res) => {
 
     //ver se a compra existe
@@ -860,6 +860,88 @@ app.get('/produto/:id/compras', async(req,res)=>{
         return res.status(400).json({
             error : true,
             message : "Não foi possível conectar"
+        })
+    })
+})
+
+//DELETE - excluir ItemCompra versão 2
+app.get('/compra/:id/excluiritem/:idProduto', async(req,res) => {
+
+    //ver se a compra existe
+    if(!await compra.findByPk(req.params.id)){
+        return res.status(400).json({
+            error: true,
+            message: 'A Compra não foi encontrada.'
+        })
+    }
+    //ver se o produto existe
+    if(!await produto.findByPk(req.params.idProduto)){
+        return res.status(400).json({
+            error: true,
+            message: 'O Produto não foi encontrado.'
+        })
+    }
+
+    await itemcompra.destroy({
+        where: 
+        Sequelize.and(
+            {ProdutoId:req.params.idProduto},
+            {CompraId: req.params.id}
+        )
+    }).then(function(){
+        return res.json({
+            error: false,
+            message: 'Item excluído com sucesso!'
+        })
+    }).catch(function(erro){
+        return res.status(400).json({
+            error: true,
+            message: 'Não foi possível conectar'
+        })
+    })
+})
+
+//UPDATE - Atualizar ItemCompra com id de uma compra
+app.put('/compra/:id/editaritem/:idProduto', async(req,res)=>{
+    const item={
+        quantidade: req.body.quantidade,
+        valor: req.body.valor
+    }
+
+    //ver se a compra existe
+    if(!await compra.findByPk(req.params.id)){
+        return res.status(400).json({
+            error: true,
+            message: 'A compra não foi encontrada.'
+        })
+    }
+
+    //ver se o produto existe
+    if(!await produto.findByPk(req.params.idProduto)){
+        return res.status(400).json({
+            error: true,
+            message: 'O Produto não foi encontrado.'
+        })
+    }
+
+    // alterar o item da compra
+    await itemcompra.update(item, {
+        //Condições para alteração
+        where: 
+        Sequelize.and(
+            {ProdutoId:req.params.idProduto},
+            {CompraId: req.params.id}
+        )
+    }).then(function(itens){
+        return res.json({
+            error: false,
+            message: 'Compra alterado com sucesso',
+            itens
+        })
+    }).catch(function(erro){
+        return res.json({
+            error: true,
+            message: 'Não foi possível conectar.'
         })
     })
 })

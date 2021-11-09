@@ -18,6 +18,9 @@ import { ListarCompra } from './views/Compra/Listar';
 import { CadastrarCompra } from './views/Compra/Cadastrar';
 import { EditarCompra } from './views/Compra/Editar';
 import { VerCompra } from './views/Compra/Consulta';
+import { AdicionarItemCompra } from './views/ItemCompra/AdicionarItem';
+import { EditarItemCompra } from './views/ItemCompra/EditarItem';
+
 
 import { ListarProduto } from './views/Produto/Listar';
 import { CadastrarProduto } from './views/Produto/Cadastrar';
@@ -49,6 +52,9 @@ function App() {
           <Route path="/cadastrarcompra" component={CadastrarCompra}/>
           <Route path="/editarcompra/:id" component={EditarCompra}/>
           <Route path="/compra/:id" component={VerCompra}/>
+
+          <Route path="/itemcompra/:id/adicionaritem" component={AdicionarItemCompra}/>
+          <Route path="/itemcompra/:id/editaritem/:ProdutoId" component={EditarItemCompra }/>
 
           <Route path="/listar-produtos" component={ListarProduto}/>
           <Route path="/cadastrarproduto" component={ CadastrarProduto }/>
